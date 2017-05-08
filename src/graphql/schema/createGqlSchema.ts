@@ -23,7 +23,7 @@ export type SchemaOptions = {
   // The path to read our injections from
   schemaInjection?: string,
   // array of mustations or queries ready to be injected
-  schemaExtensions?: Array<mixed>
+  schemaExtensions?: Array<any>
 }
 
 /**

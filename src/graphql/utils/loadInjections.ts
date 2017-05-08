@@ -6,9 +6,8 @@
 import {  GraphQLFieldConfig } from 'graphql'
 var requireGlob = require('require-glob')
 
-export default function loadInjections(dirToInject: string, extensions: Array<mixed>, type: string): Array<[string, GraphQLFieldConfig<never, mixed>]> {
-
-  if (extensions.length > 0 ) {
+export default function loadInjections(dirToInject: string, extensions: Array<any>, type: string): Array<[string, GraphQLFieldConfig<never, mixed>]> {
+  if (extensions && extensions.length > 0 ) {
     let injections = [] as Array<[string, GraphQLFieldConfig<never, mixed>]>
     for (var index = 0; index < extensions.length; index++) {
       var element = extensions[index] as any;

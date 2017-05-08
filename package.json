@@ -1,6 +1,6 @@
 {
   "name": "gvnn-postgraphql",
-  "version": "3.2.1",
+  "version": "3.3.3",
   "description": "A GraphQL schema created by reflection over a PostgreSQL schema 🐘",
   "author": "Caleb Meredith <calebmeredith8@gmail.com>",
   "license": "MIT",

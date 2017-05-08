@@ -27,7 +27,7 @@ export default async function createPostGraphQLSchema (
     jwtPgTypeIdentifier?: string,
     disableDefaultMutations?: boolean,
     schemaInjection?: string,
-    schemaExtensions?: Array<mixed>,
+    schemaExtensions?: Array<any>,
   } = {},
 ): Promise<GraphQLSchema> {
   // Create our inventory.
