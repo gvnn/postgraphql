@@ -38,7 +38,7 @@ function createMutationGqlType (buildToken: BuildToken): GraphQLObjectType | und
             .map(collection => createCollectionMutationFieldEntries(buildToken, collection))
             .reduce((a, b) => a.concat(b), [])
     ),
-    ...(loadInjections(options.schemaInjection, 'mutation')
+    ...(loadInjections(options.schemaInjection, options.schemaExtensions, 'mutation')
 
     ),
   ]

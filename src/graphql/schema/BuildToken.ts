@@ -31,6 +31,8 @@ interface BuildToken {
     readonly disableDefaultMutations: boolean,
     // Path to read shcema injections from
     readonly schemaInjection: string,
+    // array of mustations or queries ready to be injected
+    readonly schemaExtensions: Array<mixed>
   },
   // Hooks for adding custom fields/types into our schema.
   readonly _hooks: _BuildTokenHooks,

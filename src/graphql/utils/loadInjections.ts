@@ -6,18 +6,27 @@
 import {  GraphQLFieldConfig } from 'graphql'
 var requireGlob = require('require-glob')
 
-export default function loadInjections(dirToInject: string, type: string): Array<[string, GraphQLFieldConfig<never, mixed>]> {
+export default function loadInjections(dirToInject: string, extensions: Array<mixed>, type: string): Array<[string, GraphQLFieldConfig<never, mixed>]> {
 
-  if (dirToInject === '' ) return []
-
-  const injections = requireGlob.sync(dirToInject, {
-    cwd: process.cwd(),
-		reducer: function (_options: any, tree: Array<[string, GraphQLFieldConfig<never, mixed>]>, file: any) {
-        if (!Array.isArray(tree)) tree = []
-        if (file.exports.type === type) tree.push([file.exports.name, file.exports.schema])
-        return tree
-      },
-    })
-
-  return injections
+  if (extensions.length > 0 ) {
+    let injections = [] as Array<[string, GraphQLFieldConfig<never, mixed>]>
+    for (var index = 0; index < extensions.length; index++) {
+      var element = extensions[index] as any;
+      if (element.type === type) {
+        injections.push([element.name, element.schema])
+      }
+    }
+    return injections
+  } else {
+    if (dirToInject === '' ) return []
+    const injections = requireGlob.sync(dirToInject, {
+      cwd: process.cwd(),
+      reducer: function (_options: any, tree: Array<[string, GraphQLFieldConfig<never, mixed>]>, file: any) {
+          if (!Array.isArray(tree)) tree = []
+          if (file.exports.type === type) tree.push([file.exports.name, file.exports.schema])
+          return tree
+        },
+      })
+    return injections
+  }
 }

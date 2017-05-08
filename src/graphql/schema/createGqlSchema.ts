@@ -22,6 +22,8 @@ export type SchemaOptions = {
   _typeOverrides?: _BuildTokenTypeOverrides,
   // The path to read our injections from
   schemaInjection?: string,
+  // array of mustations or queries ready to be injected
+  schemaExtensions?: Array<mixed>
 }
 
 /**
@@ -39,6 +41,7 @@ export default function createGqlSchema (inventory: Inventory, options: SchemaOp
       dynamicJson: options.dynamicJson || false,
       disableDefaultMutations: options.disableDefaultMutations || false,
       schemaInjection: options.schemaInjection || '',
+      schemaExtensions: options.schemaExtensions || [],
     },
     _hooks: options._hooks || {},
     _typeOverrides: options._typeOverrides || new Map(),

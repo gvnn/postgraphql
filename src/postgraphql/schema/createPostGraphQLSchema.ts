@@ -27,6 +27,7 @@ export default async function createPostGraphQLSchema (
     jwtPgTypeIdentifier?: string,
     disableDefaultMutations?: boolean,
     schemaInjection?: string,
+    schemaExtensions?: Array<mixed>,
   } = {},
 ): Promise<GraphQLSchema> {
   // Create our inventory.
@@ -111,6 +112,7 @@ export default async function createPostGraphQLSchema (
     dynamicJson: options.dynamicJson,
     disableDefaultMutations: options.disableDefaultMutations,
     schemaInjection: options.schemaInjection,
+    schemaExtensions: options.schemaExtensions,
 
     // If we have a JWT Postgres type, let us override the GraphQL output type
     // with our own.

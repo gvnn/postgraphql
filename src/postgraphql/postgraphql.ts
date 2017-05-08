@@ -28,6 +28,7 @@ type PostGraphQLOptions = {
   bodySizeLimit?: string,
   pgSettings?: { [key: string]: mixed },
   schemaInjection?: string,
+  schemaExtensions?: Array<mixed>,
 }
 
 /**

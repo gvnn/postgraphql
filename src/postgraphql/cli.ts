@@ -82,6 +82,7 @@ const {
   showErrorStack,
   bodySizeLimit,
   schemaInjection,
+  schemaExtensions,
 // tslint:disable-next-line no-any
 } = program as any
 
@@ -127,6 +128,7 @@ const server = createServer(postgraphql(pgConfig, schemas, {
   exportGqlSchemaPath,
   bodySizeLimit,
   schemaInjection,
+  schemaExtensions,
 }))
 
 // Start our server by listening to a specific port and host name. Also log
