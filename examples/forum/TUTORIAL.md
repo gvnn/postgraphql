@@ -46,7 +46,7 @@ $ psql postgres://localhost:5432/testdb # Connects to the `testdb` database at `
 $ psql postgres://somehost:2345/somedb  # connects to the `somedb` database at `postgres://somehost:2345`
 ```
 
-Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats.
+Read the documentation on [Postgres connection strings](https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING) to learn more about alternative formats (including using a password).
 
 After running `psql` with your database URL, you should be in a SQL prompt:
 
@@ -308,7 +308,7 @@ Don’t get too stuck on the function implementations. It is fairly easy to disc
 >
 > 1. The function has a table row as the first argument.
 > 2. The function is in the same schema as the table of the first argument.
-> 3. The function’s name is prefixed by the table first argument’s name.
+> 3. The function’s name is prefixed by the table’s name.
 > 4. The function is marked as `stable` or `immutable` which makes it a query and not a mutation.
 >
 > All three of the above functions meet these conditions and as such will be computed fields. In GraphQL this ends up looking like:
@@ -482,7 +482,7 @@ After we insert a profile into `forum_example.person`, we use the `pgcrypto` ext
 >
 > For an overview of passwords in Postgres past the `pgcrypto` documentation, see the answer to the StackOverflow question “[How can I hash passwords in Postgres?](http://stackoverflow.com/a/18687445/1568890)”
 
-At the end of the implementation you will see `language plpgsql strict security definer`. `language plpgsql` we already understand, but the other words are new. The word `strict` means that if the function gets null input, than the output will be automatically null as well and Postgres won’t call the function. That is `password` cannot be null or `first_name` cannot be null otherwise the result will also be null and nothing will be executed. The words `security definer` mean that this function is executed with the privileges of the Postgres user who created it. Remember how we said users would never be able to insert into `forum_example_private.person_account`? Well this function can insert into `forum_example_private.person_account` because it uses the privileges of the definer.
+At the end of the implementation you will see `language plpgsql strict security definer`. `language plpgsql` we already understand, but the other words are new. The word `strict` means that if the function gets null input, then the output will be automatically null as well and Postgres won’t call the function. That is `password` cannot be null or `first_name` cannot be null otherwise the result will also be null and nothing will be executed. The words `security definer` mean that this function is executed with the privileges of the Postgres user who created it. Remember how we said users would never be able to insert into `forum_example_private.person_account`? Well this function can insert into `forum_example_private.person_account` because it uses the privileges of the definer.
 
 > **Warning:** Make sure that when you create a function with `security definer` there are no ‘holes’ a user could use to see or mutate more data than they are not allowed to. Since the above is a simple function, we are fine. If you don’t need `security definer`, try not to use it.
 
